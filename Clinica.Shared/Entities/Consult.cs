@@ -20,7 +20,7 @@ namespace Clinica.Shared.Entities
         public string DoctorsName { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Fecha")]
-        public DateTime Date { get; set; }
+        public string Date { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Sintomas")]
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]

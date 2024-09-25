@@ -3,6 +3,7 @@ using Clinica.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clinica.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240925154824_prueba3")]
+    partial class prueba3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,7 +34,7 @@ namespace Clinica.API.Migrations
 
                     b.Property<string>("Date")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Hour")
                         .HasColumnType("int");
@@ -48,7 +51,7 @@ namespace Clinica.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
+                    b.HasIndex("Name", "Date")
                         .IsUnique();
 
                     b.ToTable("Agendas");
@@ -129,9 +132,6 @@ namespace Clinica.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Diagnoses");
                 });
 
@@ -157,9 +157,6 @@ namespace Clinica.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Medications");
                 });
@@ -215,9 +212,6 @@ namespace Clinica.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Patients");
                 });
 
@@ -250,9 +244,6 @@ namespace Clinica.API.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Description")
-                        .IsUnique();
 
                     b.ToTable("Treatments");
                 });

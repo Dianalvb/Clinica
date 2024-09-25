@@ -38,9 +38,8 @@ namespace Clinica.Shared.Entities
         [Display(Name = "Colonia")]
         [MaxLength(100, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Colonia { get; set; } = null!;
-        [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        [Display(Name = "Numero de Seguro")]
-        [MaxLength(16, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
-        public int InsuranceNumber { get; set; } 
+        [Display(Name = "Número de Seguro")]
+        public int InsuranceNumber { get; set; }
+        public bool Active { get; set; }
     }
 }

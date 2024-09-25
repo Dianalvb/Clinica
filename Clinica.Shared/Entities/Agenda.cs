@@ -16,7 +16,7 @@ namespace Clinica.Shared.Entities
         public string Name { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Fecha")]
-        public int Date { get; set; }
+        public string Date { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Hora")]
         public int Hour { get; set; }
