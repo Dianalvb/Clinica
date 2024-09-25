@@ -5,22 +5,23 @@ using Microsoft.AspNetCore.Mvc;
 namespace Clinica.API.Controllers
 {
     [ApiController]
-    [Route("/api/agendas")]
-    public class AgendasController : ControllerBase
+    [Route("/api/diagnoses")]
+    public class DiagnosesController: ControllerBase
     {
         private readonly DataContext dataContext;
-        public AgendasController(DataContext dataContext)
+
+        public DiagnosesController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
         [HttpPost]
 
-        public async Task <IActionResult> PostAsync (Agenda Agendas)
+        public async Task<IActionResult> PostAsync(Diagnosis Diagnoses)
         {
-            dataContext.Agendas.Add(Agendas);
+            dataContext.Diagnoses.Add(Diagnoses);
             await dataContext.SaveChangesAsync();
-            return Ok(Agendas);
+            return Ok(Diagnoses);
         }
+
     }
 }
-
