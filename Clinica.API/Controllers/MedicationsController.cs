@@ -6,21 +6,20 @@ namespace Clinica.API.Controllers
 {
     [ApiController]
     [Route("/api/agendas")]
-    public class AgendasController : ControllerBase
+    public class MedicationsController: ControllerBase
     {
         private readonly DataContext dataContext;
-        public AgendasController(DataContext dataContext)
+        public MedicationsController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
         [HttpPost]
 
-        public async Task <IActionResult> PostAsync (Agenda Agendas)
+        public async Task<IActionResult> PostAsync(Medication Medications)
         {
-            dataContext.Agendas.Add(Agendas);
+            dataContext.Medication.Add(Medications);
             await dataContext.SaveChangesAsync();
-            return Ok(Agendas);
+            return Ok(Medications);
         }
     }
 }
-
