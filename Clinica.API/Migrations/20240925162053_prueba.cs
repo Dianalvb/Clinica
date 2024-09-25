@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -11,25 +10,21 @@ namespace Clinica.API.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_Agendas_Name",
-                table: "Agendas");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Hour",
-                table: "Agendas",
-                type: "datetime2",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "Agendas",
-                type: "datetime2",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int");
+            migrationBuilder.CreateTable(
+                name: "Agendas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ConsultDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConsultHour = table.Column<int>(type: "int", nullable: false),
+                    Symptoms = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agendas", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Consults",
@@ -39,7 +34,7 @@ namespace Clinica.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DoctorsName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ConsultDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Symptoms = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Diagnosis = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
@@ -118,9 +113,9 @@ namespace Clinica.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agendas_Name_Date",
+                name: "IX_Agendas_Name",
                 table: "Agendas",
-                columns: new[] { "Name", "Date" },
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -128,11 +123,38 @@ namespace Clinica.API.Migrations
                 table: "Consults",
                 column: "Name",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Diagnoses_Name",
+                table: "Diagnoses",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Medications_Name",
+                table: "Medications",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patients_Name",
+                table: "Patients",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Treatments_Description",
+                table: "Treatments",
+                column: "Description",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Agendas");
+
             migrationBuilder.DropTable(
                 name: "Consults");
 
@@ -147,32 +169,6 @@ namespace Clinica.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Treatments");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Agendas_Name_Date",
-                table: "Agendas");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Hour",
-                table: "Agendas",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "datetime2");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "Date",
-                table: "Agendas",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "datetime2");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Agendas_Name",
-                table: "Agendas",
-                column: "Name",
-                unique: true);
         }
     }
 }

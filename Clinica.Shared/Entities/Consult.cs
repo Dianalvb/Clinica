@@ -20,7 +20,7 @@ namespace Clinica.Shared.Entities
         public string DoctorsName { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Fecha")]
-        public string Date { get; set; } = null!;
+        public string ConsultDate { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Sintomas")]
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
@@ -29,5 +29,6 @@ namespace Clinica.Shared.Entities
         [Display(Name = "Diagnostico")]
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Diagnosis { get; set; } = null!;
+        public ICollection<Diagnosis>? Diagnoses { get; set; }
     }
 }
