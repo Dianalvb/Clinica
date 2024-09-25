@@ -1,6 +1,7 @@
 ﻿using Clinica.API.Data;
 using Clinica.Shared.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clinica.API.Controllers
 {
@@ -14,6 +15,10 @@ namespace Clinica.API.Controllers
             this.dataContext = dataContext;
         }
         [HttpPost]
+        public async Task<IActionResult> GetAsync()
+        {
+            return Ok(await dataContext.Agendas.ToListAsync());
+        }
 
         public async Task <IActionResult> PostAsync (Agenda Agendas)
         {
