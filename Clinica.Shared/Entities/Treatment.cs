@@ -26,7 +26,7 @@ namespace Clinica.Shared.Entities
         [Display(Name = "Descripción del tratamiento")]
         [MaxLength(1000, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Description { get; set; } = null!;
-        public Medication Medication { get; set; }
+        public Medication? Medication { get; set; }
 
     }
 }
