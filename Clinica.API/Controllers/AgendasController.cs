@@ -15,11 +15,6 @@ namespace Clinica.API.Controllers
             this.dataContext = dataContext;
         }
         [HttpPost]
-        public async Task<IActionResult> GetAsync()
-        {
-            return Ok(await dataContext.Agendas.ToListAsync());
-        }
-
         public async Task <IActionResult> PostAsync (Agenda Agendas)
         {
             dataContext.Agendas.Add(Agendas);

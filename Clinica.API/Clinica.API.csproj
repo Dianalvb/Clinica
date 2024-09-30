@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Clinica.Shared\Clinica.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

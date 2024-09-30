@@ -16,13 +16,14 @@ namespace Clinica.Shared.Entities
         public string Name { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Fecha")]
-        public string Date { get; set; } = null!;
+        public string ConsultDate { get; set; } = null!;
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Hora")]
-        public int Hour { get; set; }
+        public int ConsultHour { get; set; }
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Fecha")]
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Symptoms { get; set; } = null!;
+        public Patient Patient { get; set; }
     }
 }

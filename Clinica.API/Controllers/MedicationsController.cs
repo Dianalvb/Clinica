@@ -15,11 +15,11 @@ namespace Clinica.API.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> PostAsync(Medication Medications)
+        public async Task<IActionResult> PostAsync(Medication Medication)
         {
             dataContext.Medications.Add(Medications);
             await dataContext.SaveChangesAsync();
-            return Ok(Medications);
+            return Ok(Medication);
         }
     }
 }

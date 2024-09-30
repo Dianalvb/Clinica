@@ -29,11 +29,11 @@ namespace Clinica.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Date")
+                    b.Property<string>("ConsultDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Hour")
+                    b.Property<int>("ConsultHour")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -62,7 +62,7 @@ namespace Clinica.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Date")
+                    b.Property<string>("ConsultDate")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
