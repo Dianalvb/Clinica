@@ -13,13 +13,13 @@ namespace Clinica.API.Controllers
             {
                 this.dataContext = dataContext;
             }
-            [HttpPost]
 
+        [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
             return Ok(await dataContext.Consults.ToListAsync());
         }
-
+        [HttpPost]
         public async Task<IActionResult> PostAsync(Consult Consults)
             {
                 dataContext.Consults.Add(Consults);
