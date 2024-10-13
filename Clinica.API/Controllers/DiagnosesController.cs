@@ -7,27 +7,46 @@ namespace Clinica.API.Controllers
 {
     [ApiController]
     [Route("/api/diagnoses")]
-    public class DiagnosesController: ControllerBase
+    public class DiagnosesController : ControllerBase
     {
         private readonly DataContext dataContext;
-
         public DiagnosesController(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
         [HttpGet]
-
         public async Task<IActionResult> GetAsync()
         {
             return Ok(await dataContext.Diagnoses.ToListAsync());
         }
-        [HttpPost]
-        public async Task<IActionResult> PostAsync(Diagnosis Diagnoses)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAsync(int id)
         {
-            dataContext.Diagnoses.Add(Diagnoses);
-            await dataContext.SaveChangesAsync();
-            return Ok(Diagnoses);
+            return Ok(await dataContext.Diagnoses.FirstOrDefaultAsync(x => x.Id == id));
         }
-
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(Diagnosis diagnosis)
+        {
+            dataContext.Diagnoses.Add(diagnosis);
+            await dataContext.SaveChangesAsync();
+            return Ok(diagnosis);
+        }
+        [HttpPut]
+        public async Task<ActionResult> Put(Diagnosis diagnosis)
+        {
+            dataContext.Diagnoses.Update(diagnosis);
+            await dataContext.SaveChangesAsync();
+            return Ok(diagnosis);
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var afectedRows = await dataContext.Diagnoses.Where(x => x.Id == id).ExecuteDeleteAsync();
+            if (afectedRows == 0)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }

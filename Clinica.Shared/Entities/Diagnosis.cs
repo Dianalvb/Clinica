@@ -31,7 +31,7 @@ namespace Clinica.Shared.Entities
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Description { get; set; } = null!;
 
-        public ICollection<Treatment>? Treatments { get; set; }
+        public Treatment? Treatment { get; set; }
 
 
     }

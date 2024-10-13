@@ -24,6 +24,6 @@ namespace Clinica.Shared.Entities
         [Display(Name = "Fecha")]
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Symptoms { get; set; } = null!;
-        public Patient Patient { get; set; }
+        public Patient? Patient { get; set; }
     }
 }

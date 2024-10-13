@@ -14,12 +14,39 @@ namespace Clinica.API.Controllers
         {
             this.dataContext = dataContext;
         }
-        [HttpPost]
-        public async Task <IActionResult> PostAsync (Agenda Agendas)
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
         {
-            dataContext.Agendas.Add(Agendas);
+            return Ok(await dataContext.Agendas.ToListAsync());
+        }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            return Ok(await dataContext.Agendas.FirstOrDefaultAsync(x => x.Id == id));
+        }
+        [HttpPost]
+        public async Task<IActionResult> PostAsync(Agenda agenda)
+        {
+            dataContext.Agendas.Add(agenda);
             await dataContext.SaveChangesAsync();
-            return Ok(Agendas);
+            return Ok(agenda);
+        }
+        [HttpPut]
+        public async Task<ActionResult> Put(Agenda agenda)
+        {
+            dataContext.Agendas.Update(agenda);
+            await dataContext.SaveChangesAsync();
+            return Ok(agenda);
+        }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var afectedRows = await dataContext.Agendas.Where(x => x.Id == id).ExecuteDeleteAsync();
+            if (afectedRows == 0)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

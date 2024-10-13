@@ -41,6 +41,6 @@ namespace Clinica.Shared.Entities
         [Display(Name = "Número de Seguro")]
         public int InsuranceNumber { get; set; }
         public bool Active { get; set; }
-        public ICollection<Consult>? Consults { get; set; }
+        public Consult? Consult { get; set; }
     }
 }
