@@ -9,7 +9,7 @@ namespace Clinica.Shared.Entities
 {
     public class Patient
     {
-      public int Id { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
         [Display(Name = "Nombre")]
         [MaxLength(50, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
@@ -39,7 +39,7 @@ namespace Clinica.Shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Colonia { get; set; } = null!;
         [Display(Name = "Número de Seguro")]
-        public int InsuranceNumber { get; set; }
+        public int InsuranceNumber { get; set; } 
         public bool Active { get; set; }
         public Consult? Consult { get; set; }
     }
