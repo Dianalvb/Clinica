@@ -1,4 +1,5 @@
 ﻿using Clinica.Shared.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Drawing;
 
 namespace Clinica.API.Data
@@ -10,24 +11,25 @@ namespace Clinica.API.Data
         {
             this.dataContext = dataContext;
         }
+        
         public async Task SeedAsync()
         {
             await dataContext.Database.EnsureCreatedAsync();
             await CheckAgendasAsync();
-            await CheckConsultsAsync();
+            /*await CheckConsultsAsync();
             await CheckDiagnosesAsync();
             await CheckMedicationsAsync();
             await CheckPatientsAsync();
-            await CheckTreatmentsAsync();
+            await CheckTreatmentsAsync();*/
         }
         private async Task CheckAgendasAsync()
         {
             if (!dataContext.Agendas.Any())
             {
-                var patient = dataContext.Patients.FirstOrDefault(x => x.Name == "Hugo");
+                var patient = await dataContext.Patients.FirstOrDefaultAsync(x => x.Name == "Hugo");
                 if (patient != null)
                 {
-                    dataContext.Agendas.Add(new Agenda { Name = "Hugo Cortijo", Patient = patient });
+                    dataContext.Agendas.Add(new Agenda { Name = "Hugo", Patient = patient });
                     await dataContext.SaveChangesAsync();
                 }   
             }
@@ -37,21 +39,21 @@ namespace Clinica.API.Data
         {
             if (!dataContext.Consults.Any())
             {
-                var diagnosis = dataContext.Diagnoses.FirstOrDefault(x => x.Name == "Hugo Cortijo");
+                var diagnosis = await dataContext.Diagnoses.FirstOrDefaultAsync(x => x.Name == "Hugo");
                 if (diagnosis != null)
                 {
-                    dataContext.Consults.Add(new Consult { Name = "Hugo Cortijo", Diagnoses = diagnosis });
+                    dataContext.Consults.Add(new Consult { Name = "Hugo", Diagnosis = diagnosis });
                     }
                 await dataContext.SaveChangesAsync();
             }
 
         }
-
+        
         private async Task CheckTreatmentsAsync()
         {
             if (!dataContext.Treatments.Any())
             {
-                var medication = dataContext.Medications.FirstOrDefault(x => x.Name == "dietilcarbamazina (DEC)");
+                var medication = await dataContext.Medications.FirstOrDefaultAsync(x => x.Name == "dietilcarbamazina (DEC)");
                 if (medication != null)
                 {
                     dataContext.Treatments.Add(new Treatment { Description = "El tratamiento consiste en antibióticos y antiparasitarios\r\nTomar fármacos una vez al año puede matar los parásitos.", Medication = medication });
@@ -63,7 +65,7 @@ namespace Clinica.API.Data
         {
             if (!dataContext.Diagnoses.Any())
             {
-                var treatment = dataContext.Treatments.FirstOrDefault(x => x.Description == "\"El tratamiento consiste en antibióticos y antiparasitarios\\r\\nTomar fármacos una vez al año puede matar los parásitos.");
+                var treatment = await dataContext.Treatments.FirstOrDefaultAsync(x => x.Description == "\"El tratamiento consiste en antibióticos y antiparasitarios\\r\\nTomar fármacos una vez al año puede matar los parásitos.");
                 if (treatment != null)
                 {
                     dataContext.Diagnoses.Add(new Diagnosis { Name = "Elefantitis" });
@@ -84,7 +86,7 @@ namespace Clinica.API.Data
         {
             if (!dataContext.Patients.Any())
             {
-                var consult = dataContext.Consults.FirstOrDefault(x => x.Name == "Hugo Cortijo");
+                var consult = await dataContext.Consults.FirstOrDefaultAsync(x => x.Name == "Hugo");
                 if (consult != null)
                 {
                     dataContext.Patients.Add(new Patient { Name = "Hugo", Consult = consult });
