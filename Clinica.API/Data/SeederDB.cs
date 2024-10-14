@@ -16,11 +16,11 @@ namespace Clinica.API.Data
         {
             await dataContext.Database.EnsureCreatedAsync();
             await CheckAgendasAsync();
-            /*await CheckConsultsAsync();
-            await CheckDiagnosesAsync();
-            await CheckMedicationsAsync();
             await CheckPatientsAsync();
-            await CheckTreatmentsAsync();*/
+            await CheckConsultsAsync();
+            await CheckDiagnosesAsync();
+            await CheckTreatmentsAsync();
+            await CheckMedicationsAsync();
         }
         private async Task CheckAgendasAsync()
         {
@@ -33,7 +33,6 @@ namespace Clinica.API.Data
                     await dataContext.SaveChangesAsync();
                 }   
             }
-
         }
         private async Task CheckConsultsAsync()
         {
@@ -46,7 +45,6 @@ namespace Clinica.API.Data
                     }
                 await dataContext.SaveChangesAsync();
             }
-
         }
         
         private async Task CheckTreatmentsAsync()
@@ -65,19 +63,16 @@ namespace Clinica.API.Data
         {
             if (!dataContext.Diagnoses.Any())
             {
-                var treatment = await dataContext.Treatments.FirstOrDefaultAsync(x => x.Description == "\"El tratamiento consiste en antibióticos y antiparasitarios\\r\\nTomar fármacos una vez al año puede matar los parásitos.");
-                if (treatment != null)
-                {
+                
                     dataContext.Diagnoses.Add(new Diagnosis { Name = "Elefantitis" });
                     await dataContext.SaveChangesAsync();
-                }
             }
         }
         private async Task CheckMedicationsAsync()
         {
             if (!dataContext.Medications.Any())
             {
-                dataContext.Medications.Add(new Medication { Name = "dietilcarbamazina(DEC)" });
+                dataContext.Medications.Add(new Medication { Name = "dietilcarbamazina(DEC)", Description="Medicamento", Strength=500 });
 
                 await dataContext.SaveChangesAsync();
             }
@@ -86,12 +81,8 @@ namespace Clinica.API.Data
         {
             if (!dataContext.Patients.Any())
             {
-                var consult = await dataContext.Consults.FirstOrDefaultAsync(x => x.Name == "Hugo");
-                if (consult != null)
-                {
-                    dataContext.Patients.Add(new Patient { Name = "Hugo", Consult = consult });
+                    dataContext.Patients.Add(new Patient { Name = "Hugo", LastName="Díaz", SurName="Sanchez", Colonia="Conocida", Phone="222222222", Street="Conocida1", Email="Hugo@gmail.com", InsuranceNumber=5623 });
                     await dataContext.SaveChangesAsync();
-                }
                 
             }
         }

@@ -25,10 +25,7 @@ namespace Clinica.Shared.Entities
         [Display(Name = "Sintomas")]
         [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
         public string Symptoms { get; set; } = null!;
-        [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        [Display(Name = "Diagnostico")]
-        [MaxLength(500, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres")]
-        public string DiagnosisPatient { get; set; } = null!;
+       
         public Diagnosis? Diagnosis { get; set; }
     }
 }
