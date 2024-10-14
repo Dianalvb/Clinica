@@ -34,6 +34,15 @@ namespace Clinica.API.Data
                 }   
             }
         }
+        private async Task CheckPatientsAsync()
+        {
+            if (!dataContext.Patients.Any())
+            {
+                dataContext.Patients.Add(new Patient { Name = "Hugo", LastName = "Díaz", SurName = "Sanchez", Colonia = "Conocida", Phone = "222222222", Street = "Conocida1", Email = "Hugo@gmail.com", InsuranceNumber = 5623 });
+                await dataContext.SaveChangesAsync();
+
+            }
+        }
         private async Task CheckConsultsAsync()
         {
             if (!dataContext.Consults.Any())
@@ -46,7 +55,16 @@ namespace Clinica.API.Data
                 await dataContext.SaveChangesAsync();
             }
         }
-        
+        private async Task CheckDiagnosesAsync()
+        {
+            if (!dataContext.Diagnoses.Any())
+            {
+
+                dataContext.Diagnoses.Add(new Diagnosis { Name = "Elefantitis" });
+                await dataContext.SaveChangesAsync();
+            }
+        }
+
         private async Task CheckTreatmentsAsync()
         {
             if (!dataContext.Treatments.Any())
@@ -59,15 +77,7 @@ namespace Clinica.API.Data
                 }
             }
         }
-        private async Task CheckDiagnosesAsync()
-        {
-            if (!dataContext.Diagnoses.Any())
-            {
-                
-                    dataContext.Diagnoses.Add(new Diagnosis { Name = "Elefantitis" });
-                    await dataContext.SaveChangesAsync();
-            }
-        }
+        
         private async Task CheckMedicationsAsync()
         {
             if (!dataContext.Medications.Any())
@@ -77,14 +87,6 @@ namespace Clinica.API.Data
                 await dataContext.SaveChangesAsync();
             }
         }
-        private async Task CheckPatientsAsync()
-        {
-            if (!dataContext.Patients.Any())
-            {
-                    dataContext.Patients.Add(new Patient { Name = "Hugo", LastName="Díaz", SurName="Sanchez", Colonia="Conocida", Phone="222222222", Street="Conocida1", Email="Hugo@gmail.com", InsuranceNumber=5623 });
-                    await dataContext.SaveChangesAsync();
-                
-            }
-        }
+        
     }
 }
