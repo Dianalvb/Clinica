@@ -19,6 +19,11 @@ namespace Clinica.API.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Agenda>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<Consult>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<Diagnosis>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<Medication>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<Patient>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<Treatment>().HasIndex(x => x.Description).IsUnique();
         }
     }
 }
